@@ -96,7 +96,7 @@ function createMap() {
 
      baseStreet = L.mapbox.styleLayer('mapbox://styles/mapbox/light-v10').addTo(map);
      baseSatellite = L.mapbox.styleLayer('mapbox://styles/mapbox/satellite-streets-v11');
-     baseTerrain = L.mapbox.styleLayer('mapbox://styles/mapbox/satellite-v9');
+     baseTerrain = L.mapbox.styleLayer('mapbox://styles/mapbox/outdoors-v11');
     
      L.control.scale({
          position: 'bottomleft'
