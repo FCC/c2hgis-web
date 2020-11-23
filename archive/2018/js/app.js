@@ -1999,17 +1999,17 @@ function updateStats() {
     }
 
     $('.geog-provcount').text(formatStat(geo_prop.provcount_c));
-    $('.geog-intaccess').text(geo_prop.geography_type === 'nation' ? '94.4%' : formatStatAppend(geo_prop.pctpopwbbacc, 1, '%'));
+    $('.geog-intaccess').text(formatStatAppend(geo_prop.pctpopwbbacc, 1, '%'));
     $('.geog-wldl').text(formatStatAppend(dsgteq25, 1, '%'));
     $('.geog-wlul').text(formatStatAppend(usgteq3, 1, '%'));
     if (geo_prop.dl_tiers in bb_speed_tiers) $('.geog-commondl').text((bb_speed_tiers[geo_prop.dl_tiers].range) + ' mbps');
     else $('.geog-commondl').text('N/A');
     if (geo_prop.ul_tiers in bb_speed_tiers) $('.geog-commonul').text((bb_speed_tiers[geo_prop.ul_tiers].range) + ' mbps');
     else $('.geog-commonul').text('N/A');
-    if (geo_prop.geography_type === 'nation') {
-        $('.geog-commondl').text(bb_speed_tiers['7'].range + ' mbps');
-        $('.geog-commonul').text(bb_speed_tiers['2'].range + ' mbps');
-    }
+    // if (geo_prop.geography_type === 'nation') {
+    //     $('.geog-commondl').text(bb_speed_tiers['7'].range + ' mbps');
+    //     $('.geog-commonul').text(bb_speed_tiers['2'].range + ' mbps');
+    // }
     $('.geog-adoptpct').html(geo_prop.subscription_ratio === -9999 ? '<em>Data withheld to maintain firm confidentiality</em>' : geo_prop.subscription_ratio + ' connections per 100 households');
 
     // Health tab ======================================================================================================
