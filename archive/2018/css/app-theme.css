@@ -3770,6 +3770,9 @@ a.gen-passcode {
     #app-title h3 {
         display: none;
     }
+    #browse-by-category {
+        font-size: small;
+    }
 }
 
 @media (min-width: 1200px) {
