@@ -132,7 +132,7 @@ var insight_ly = {
             step: 5,
             values: [0, 4535],
             label: ' Stays',
-            tooltip: 'Number of preventable hospital stays per 100,000 people.',
+            tooltip: 'Rate of hospital stays for ambulatory-care sensitive conditions per 100,000 Medicare enrollees.',
             slider: []
         },
         in_sick_days: {
