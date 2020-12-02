@@ -415,42 +415,43 @@ var health_ly = {
         style: 'health_sec_diabetes',
         ranges: '≤8.7, 8.8 - 10.7, 10.8 - 12.6, 12.7 - 15.4, >15.4',
         label: '% Diabetes',
-        tooltip: 'Percentage of adults with diabetes.'
+        tooltip: 'in_diabetes_rate'
     },
     hh_obesity: {
         column: 'adult_obesity_pct',
         style: 'health_sec_obesity',
         ranges: '≤28.3, 28.4 - 31.7, 31.8 - 34.4, 34.5 - 37.3, >37.3',
         label: '% Obesity',
-        tooltip: 'Percentage of adults that report a BMI of 30 or more.'
+        tooltip: 'in_obs_rate'
     },
     hh_pcppc: {
         column: 'pcp_rate_per_100000',
         style: 'health_sec_pcpacc',
-        ranges: '≤24.2, 24.2 - 39.8, 39.8 - 54, 54 - 76.1, >76.1',
+        // ranges: '≤24.2, 24.2 - 39.8, 39.8 - 54, 54 - 76.1, >76.1',
+        ranges: '>76.1, 76.1 - 54, 54 - 39.8, 39.8 - 24.2, ≤24.2',
         label: 'PCP/100,000',
-        tooltip: 'Primary Care Physicians per 100,000 people.'
+        tooltip: 'in_pcp_access'
     },
     hh_poorfair: {
         column: 'poor_fair_health_pct',
         style: 'health_sec_poorfair',
         ranges: '≤13.7, 13.8 - 16.0, 16.1 - 18.6, 18.7 - 21.8, >21.8',
         label: '% Poor/Fair Health',
-        tooltip: 'Percentage of adults reporting fair or poor health (age-adjusted).'
+        tooltip: 'in_poorfair'
     },
     hh_preventhosp: {
         column: 'preventable_hospital_stays_per_100000',
         style: 'health_sec_preventhosp',
         ranges: '≤3391, 3392 - 4284, 4285 - 5118, 5119 - 6139, >6139',
         label: '# Hospital Stays',
-        tooltip: 'Rate of hospital stays for ambulatory-care sensitive conditions per 100,000 Medicare enrollees.'
+        tooltip: 'in_prv_hosp'
     },
     hh_sick_days: {
         column: 'poor_physical_health_days_within_last_30_days',
         style: 'health_sec_sickdays',
         ranges: '≤3.4, 3.4 - 3.8, 3.8 - 4.1, 4.1 - 4.6, >4.6',
         label: '# Sick Days',
-        tooltip: 'Average number of physically unhealthy days reported in past 30 days (age-adjusted).'
+        tooltip: 'in_sick_days'
     },
 };
 

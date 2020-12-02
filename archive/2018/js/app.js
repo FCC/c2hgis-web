@@ -323,7 +323,7 @@ function defineOpioidNull(measure, value) {
         if (value === null) return 'Unavailable';
         else return formatStatAppend(value, null, '%');
     } else {
-        if (value === null) return 'Not available';
+        if (value === null) return 'Not reported';
         else return formatStatAppend(value, null, ' per 100,000');
     }
 }
@@ -1492,7 +1492,7 @@ function updateHealthLegend() {
         var health_ranges = health_ly[health_type].ranges;
         var health_ranges_array = health_ranges.split(',');
         var health_label = health_ly[health_type].label;
-        var health_tooltip = health_ly[health_type].tooltip;
+        var health_tooltip = insight_ly.health[health_ly[health_type].tooltip].tooltip;
 
         $('.health-label-min').html(health_ranges_array[0]);
         $('.health-label-max').html(health_ranges_array[4]);
