@@ -14,15 +14,15 @@ var geo_request_type = 'json';
 // prod
 var geo_host = 'https://geo.fcc.gov';
 var geo_space = 'fcc';
-var geo_workspace = 'c2h_2018';
+var geo_workspace = 'c2h_2020';
 
 //dev
 // var geo_host = 'http://gisp-geosrv-tc-dev.us-west-2.elasticbeanstalk.com';
 // var geo_space = 'c2h_opioids_dev';
 // var geo_workspace = 'c2h_opioids_dev';
 
-var table_name = 'c2hgis_2018_ui_';
-var table_name_dl = 'Connect2Health_2018_';
+var table_name = 'c2hgis_2020_release_ui_';
+var table_name_dl = 'Connect2Health_2020_release_';
 var zoom_layer_type = 'county';  // selected zoom
 var geo_type = 'county';         // calculated geog type based on zoom
 var geo_lat = 40;
