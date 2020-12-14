@@ -95,7 +95,7 @@ function createMap() {
 	 
 	 L.mapbox.accessToken = mb_accessToken;
 	 
-     map = L.mapbox.map('map', 'fcc.k74ed5ge', {
+     map = L.map('map', {
              attributionControl: true,
              maxZoom: 19,
              minZoom: 3,
@@ -108,9 +108,9 @@ function createMap() {
 
      map.attributionControl.addAttribution('<a href="http://fcc.gov">FCC</a>&nbsp|&nbsp<a href="https://www.fcc.gov/about-fcc/fcc-initiatives/connect2healthfcc">Connect2Health</a>');
 
-     baseStreet = L.mapbox.tileLayer('fcc.k74ed5ge').addTo(map);
-     baseSatellite = L.mapbox.tileLayer('fcc.k74d7n0g');
-     baseTerrain = L.mapbox.tileLayer('fcc.k74cm3ol');
+     baseStreet = L.mapbox.styleLayer('mapbox://styles/mapbox/light-v10').addTo(map);
+     baseSatellite = L.mapbox.styleLayer('mapbox://styles/mapbox/satellite-streets-v11');
+     baseTerrain = L.mapbox.styleLayer('mapbox://styles/mapbox/outdoors-v11');
     
      L.control.scale({
          position: 'bottomleft'
