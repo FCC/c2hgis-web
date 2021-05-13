@@ -17,7 +17,8 @@ var geo_space = 'fcc';
 var geo_output = 'application/json';
 
 
-var wms_method = 'gwc/service/wms';
+// var wms_method = 'gwc/service/wms';
+var wms_method = 'wms';
 
 var geo_type = 'state';
 //var geo_type = 'national';
@@ -64,12 +65,7 @@ function createMap() {
 	 
 	 L.mapbox.accessToken = mb_accessToken;
 	 
-     map = L.map('map', {
-             attributionControl: true,
-             maxZoom: 19,
-             minZoom: 3
-         })
-         .setView([40, -95], 4);    
+     map = L.mapbox.map('map').setView([40, -95], 4);
 
      map.attributionControl.addAttribution('<a href="http://fcc.gov">FCC</a>');
 
@@ -539,8 +535,8 @@ function redoMap(type, filter, zindex) {
 	//console.log('map in_layers : ' + in_layers );
 	//console.log('map in_styles : ' + in_styles );	
 	
-	var wms_method = 'gwc/service/wms';
-	//var wms_method = 'wms';
+	// var wms_method = 'gwc/service/wms';
+	var wms_method = 'wms';
 
 	//console.log('map link : ' + geo_host + '/' + geo_space + '/' + wms_method );
 	map_overlays['in_'+ type] = L.tileLayer.wms( geo_host + '/' + geo_space + '/' + wms_method +'?', {
