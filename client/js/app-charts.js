@@ -179,7 +179,7 @@ function createCharts() {
                                 return;
                             },
                             label: function (context) {
-                                return 'Number of Providers: ' + context.raw.toFixed(1) + '%';
+                                return 'Number of Providers ' + context.label + ': ' + context.raw.toFixed(1) + '%';
                             }
                         }
                     },
