@@ -610,12 +610,12 @@
                                          </div>
 									</div>
 									<br />
-									<div class="row">
-                                        <div align="center">
-    										<canvas id="ch-canvas-health-1" style="width: 300px; height: 220px;"></canvas>
-    										<div id="ch-legend-health-1" style="width: 300px; height: 30px; text-align: center;"></div>						
+                                    <div align="center">
+                                        <div class="carousel-cont">
+                                            <canvas id="ch-canvas-health-1" width="250" height="150"></canvas>
+                                            <div id="ch-legend-health-1" style="width: 300px; height: 30px; text-align: center;"></div>
                                         </div>
-									</div>									
+                                    </div>
                                 </div>
 																
 								<!-- Broadband Tab  **************************************************************** -->
@@ -794,20 +794,21 @@
 										<div class="carousel-inner" role="listbox">
 											<div class="item active">
 												<div class="carousel-cont">
-													<canvas id="ch-canvas-broadband-1" class="carousel-canvas"></canvas>
-													<div id="ch-legend-broadband-1" class="carousel-legend" ></div>						
+													<canvas id="ch-canvas-broadband-1" class="carousel-canvas" width="250" height="180"></canvas>
+													<div id="ch-legend-broadband-1" class="carousel-legend" >
+                                                        <div style="background-color:rgba(0,80,204,1); width: 20px; height: 2px; display: inline-block; margin: 4px 0;"></div>&nbsp;
+                                                        Number of Providers
+                                                    </div>
 												</div>
 											</div>
 											<div class="item">
 												<div class="carousel-cont">
-													<canvas id="ch-canvas-broadband-2" class="carousel-canvas"></canvas>
-													<div id="ch-legend-broadband-2" class="carousel-legend"></div>						
+													<canvas id="ch-canvas-broadband-2" class="carousel-canvas" width="250" height="250"></canvas>
 												</div>
 											</div>
 											<div class="item">
 												<div class="carousel-cont">
-													<canvas id="ch-canvas-broadband-3" class="carousel-canvas"></canvas>
-													<div id="ch-legend-broadband-3" class="carousel-legend"></div>						
+													<canvas id="ch-canvas-broadband-3" class="carousel-canvas" width="250" height="250"></canvas>
 												</div>
 											</div>
 										</div>
@@ -941,13 +942,7 @@
                                             </div>
                                         </div> 
 									</div> 
-									<br />		
-                                    <!--							
-									<div align="center">
-										<canvas id="ch-canvas-population-1" style="width: 300px; height: 220px;"></canvas>
-										<div id="ch-legend-population-1" style="width: 300px; height: 30px; text-align: center;"></div>						
-									</div>
-                                    -->
+									<br />
                                     <br/>
                                     <div id="carousel-pop" class="carousel slide" data-wrap="true" data-interval="false">
                                         
@@ -955,8 +950,10 @@
                                         <div class="carousel-inner" role="listbox">
                                             <div class="item active">
                                                 <div class="carousel-cont">
-                                                    <canvas id="ch-canvas-population-1" class="carousel-canvas"></canvas>
-                                                    <div id="ch-legend-population-1" class="carousel-legend" ></div>
+                                                    <canvas id="ch-canvas-population-1" class="carousel-canvas" width="250" height="180"></canvas>
+                                                    <div id="ch-legend-population-1" class="carousel-legend" >
+                                                        <div style="background-color:#3D59D7; width: 16px; height: 16px; display: inline-block;"></div>&nbsp;Urban &nbsp; <div style="background-color:#71DAD6; width: 16px; height: 16px; display: inline-block;"></div>&nbsp;Rural &nbsp;
+                                                    </div>
                                                 </div>
                                             </div>                                          
                                         </div>
@@ -1083,22 +1080,19 @@
             </footer>
     </div>
     
-	<script src="js/jquery-1.11.3.min.js"></script>
+	<script src="js/jquery-3.6.0.min.js"></script>
 	<script src="js/jquery-ui.js"></script>
 
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/bootstrap-toolkit.min.js"></script>
-    <!--
-	<script src="js/mapbox.js"></script>
-	-->
+
 
     <script src='https://api.mapbox.com/mapbox.js/v3.1.0/mapbox.js'></script>
-    
-    <!--<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/js/bootstrap-select.min.js"></script>-->
-	<!--<script src="//www.bootply.com/plugins/bootstrap-select.min.js"></script>-->
+
 	
 	<script src="js/bootstrap-select.js"></script>
-	<script src="js/chart.js"></script>
+    <script src="js/chart.js"></script>
+
 	<script src="js/jquery-color-animation-mainfile.js"></script>	
 
     <script src="js/theme.js"></script>
