@@ -15,8 +15,6 @@ var extsfilter=getExtPopFilter();
 var incrementer=0;
 
 function applyFilter(filter_n){
-	console.log("filter_n: "+filter_n);	
-	console.log("map_overlays['in_'+ type].length: "+map_overlays['in_'+ type].length);
 	map_overlays['in_'+ type][map_overlays['in_'+ type].length] = L.tileLayer.wms( geo_host + '/' + geo_space + '/' + wms_method +'?', {
 		 format: 'image/png',
 		 transparent: true,
@@ -34,7 +32,6 @@ function applyFilter(filter_n){
 
 function makeFilterString(filterarray){
 	var thisFilterString;
-	console.log("filterarray: "+filterarray);
 	for(i=0;i<filterarray.length;i++){
 		if(i != 0){
 			thisFilterString=thisFilterString+","+"'"+filterarray[i]+"'";
@@ -60,7 +57,6 @@ if(extsfilter != null){
 
 function getExtPopFilter(){
 	var thisExtPop_sel=$("#ov-select-extend").val();
-	console.log("thisExtPop_sel: "+thisExtPop_sel);
 
 	if(thisExtPop_sel) {
 		var _extsFilter=[];
@@ -70,7 +66,6 @@ function getExtPopFilter(){
 		var thisExtPopRange = selection[1].split('_');
 		var low = thisExtPopRange[0];
 		var high = thisExtPopRange[1];
-		console.log("thisExtPopRange: "+thisExtPopRange);
 		var extsFilter;
 		var started=0;
 		for (var key in extsdata ) {
@@ -87,8 +82,7 @@ function getExtPopFilter(){
 				}
 			};
 		};
-		console.log("_extsFilter: "+_extsFilter);	
-		return _extsFilter;			
+		return _extsFilter;
 	}else{
 		return null;
 	}

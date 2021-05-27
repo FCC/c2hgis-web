@@ -43,93 +43,72 @@ var chart_obj = {
 };
 
 function createCharts() {
+
     if (cur_tab === 'health') {
 
         chart_obj.health.measurements.data = {
-            labels: [
-                "Obesity",
-                "Diabetes",
-                "Smoking",
-                "Excessive Drinking",
-                "Physical Inactivity",
-                "Severe Housing"
-            ],
+            labels: ["Obesity", "Diabetes", "Smoking", "Excessive Drinking", "Physical Inactivity", "Severe Housing"],
             datasets: [
                 {
                     label: "Health Behaviors",
-                    backgroundColor: "rgba(220,220,220,0.4)",
+                    backgroundColor: "rgba(220,220,220,0.2)",
                     borderColor: "rgba(186,12,12,0.5)",
-                    borderWidth: 2,
                     pointBackgroundColor: "rgba(186,12,12,1)",
                     pointBorderColor: "#fff",
-                    pointBorderWidth: 1,
                     pointHoverBackgroundColor: "#fff",
                     pointHoverBorderColor: "rgba(220,220,220,1)",
-                    data: [
-                        geo_prop.adult_obesity_pct,
-                        geo_prop.diabetes_pct,
-                        geo_prop.smoking_pct,
-                        geo_prop.drinking_pct,
-                        geo_prop.physical_inactivity,
-                        geo_prop.severe_housing_problems
-                    ]
+                    data: [geo_prop.adult_obesity_pct, geo_prop.diabetes_pct, geo_prop.smoking_pct, geo_prop.drinking_pct, geo_prop.physical_inactivity, geo_prop.severe_housing_problems]
                 }
             ]
         };
 
         chart_obj.health.measurements.options = {
-            layout: {
-                padding: 10
-            },
-            interaction: {
-                intersect: false
-            },
-            maintainAspectRatio: false,
-            scales: {
-                r: {
-                    beginAtZero: true,
-                    ticks: {
-                        display: false
-                    }
-                }
-            },
-            plugins: {
-                tooltip: {
-                    position: 'nearest',
-                    displayColors: false,
-                    caretSize: 7,
-                    caretPadding: 4,
-                    bodyFont: {
-                        size: 14
-                    },
-                    callbacks: {
-                        title: function (context) {
-                            return;
-                        },
-                        label: function (context) {
-                            return context.label + ': ' + context.raw.toFixed(1) + '%';
-                        }
-                    }
+            responsive: true,
+            // maintainAspectRatio: false,
+            tooltips: {
+                custom: function (tooltip) {
+                    if (!tooltip) return;
+                    tooltip.displayColors = false;
                 },
-                legend: {
-                    display: false
+                callbacks: {
+                    title: function () {
+                    },
+                    label: function (tooltipItem, data) {
+                        var label = data['labels'][tooltipItem['index']];
+                        return tooltipItem.yLabel ? label + ': ' + tooltipItem.yLabel.toFixed(1) + '%' : label + ': N/A';
+                    }
                 }
+            },
+            legendCallback: function (chart) {
+                return '<ul class="radar-legends" style="width: 100%; list-style-type: none; margin-top: 15px;"><li><div style="background-color:rgba(186,12,12,0.5); width: 20px; height: 2px; display: inline-block; margin: 4px 0;"></div>&nbsp;Health Behaviors</li></ul>'
+            },
+            scale: {
+                ticks: {
+                    display: false,
+                    beginAtZero: true
+                }
+            },
+            legend: {
+                display: false
             }
         };
 
         if (chart_obj.health.measurements.chart) {
             chart_obj.health.measurements.chart.destroy();
         }
-
         chart_obj.health.measurements.chart = new Chart(document.getElementById('ch-canvas-health-1'), {
             type: 'radar',
             data: chart_obj.health.measurements.data,
             options: chart_obj.health.measurements.options
         });
 
+        $('#ch-legend-health-1').html(chart_obj.health.measurements.chart.generateLegend());
+
     } else if (cur_tab === 'broadband') {
 
         var current_slide = $('#carousel-bb .carousel-inner div.active').index() + 1;
+
+        //console.log(' current_slide : ' + current_slide );
 
         if (chart_obj.broadband.dl_tiers.chart) {
             chart_obj.broadband.dl_tiers.chart.destroy();
@@ -148,13 +127,9 @@ function createCharts() {
                 datasets: [
                     {
                         label: "Number of Providers",
-                        fill: true,
                         backgroundColor: "rgba(220,220,220,0.4)",
-                        tension: 0.4,
                         borderColor: "rgba(0,80,204,1)",
-                        borderWidth: 2,
                         pointRadius: 4,
-                        pointBorderWidth: 1,
                         pointBackgroundColor: "rgba(0,80,204,1)",
                         pointBorderColor: "#fff",
                         pointHoverBackgroundColor: "#fff",
@@ -165,37 +140,41 @@ function createCharts() {
             };
 
             chart_obj.broadband.num_providers.options = {
-                plugins: {
-                    tooltip: {
-                        position: 'nearest',
-                        displayColors: false,
-                        caretSize: 7,
-                        caretPadding: 4,
-                        bodyFont: {
-                            size: 14
-                        },
-                        callbacks: {
-                            title: function (context) {
-                                return;
-                            },
-                            label: function (context) {
-                                return 'Number of Providers ' + context.label + ': ' + context.raw.toFixed(1) + '%';
-                            }
-                        }
+                responsive: true,
+                pointHitDetectionRadius: 0,
+                scaleBeginAtZero: true,
+                tooltips: {
+                    custom: function (tooltip) {
+                        if (!tooltip) return;
+                        // Disable displaying the color box;
+                        tooltip.displayColors = false;
                     },
-                    legend: {
-                        display: false
+                    callbacks: {
+                        title: function (tooltipItem, data) {
+                        },
+                        label: function (tooltipItem, data) {
+                            var label = data.datasets[tooltipItem.datasetIndex].label || '';
+
+                            if (label) {
+                                label += ' ' + data.labels[tooltipItem.index] + ': ';
+                            }
+                            // Display value as percent
+                            label += tooltipItem.yLabel.toFixed(1) + '%';
+                            return label;
+                        }
                     }
                 },
                 scales: {
-                    y: {
+                    yAxes: [{
                         ticks: {
                             stepSize: 25
                         }
-                    }
+                    }]
+                },
+                legend: {
+                    display: false
                 }
-            }
-            ;
+            };
 
             if (chart_obj.broadband.num_providers.chart) {
                 chart_obj.broadband.num_providers.chart.destroy();
@@ -206,6 +185,8 @@ function createCharts() {
                 data: chart_obj.broadband.num_providers.data,
                 options: chart_obj.broadband.num_providers.options
             });
+
+            // $('#ch-legend-broadband-1').html(chart_obj.broadband.num_providers.chart.generateLegend());
         }	// end of current_slide == 1
 
 
@@ -213,14 +194,9 @@ function createCharts() {
         // chart - Download Tiers
 
         if (current_slide === 2) {
+
             chart_obj.broadband.dl_tiers.data = {
-                labels: [
-                    '15 - 25 mbps',
-                    '25 - 50 mbps',
-                    '50 - 100 mbps',
-                    '100 - 1,000 mbps',
-                    '> 1,000 mbps'
-                ],
+                labels: ['15 - 25 mbps', '25 - 50 mbps', '50 - 100 mbps', '100 - 1,000 mbps', '> 1,000 mbps'],
                 datasets: [{
                     data: [
                         geo_prop.pctdsgt15000kandlt25000k_hi,
@@ -240,49 +216,46 @@ function createCharts() {
             };
 
             chart_obj.broadband.dl_tiers.options = {
+                title: {
+                    display: true,
+                    position: 'bottom',
+                    text: 'Download Speed Tiers',
+                    fontSize: 14,
+                    fontFamily: '"Open Sans", "sans-serif"',
+                    fontStyle: 'normal'
+                },
+                // responsive: true,
                 maintainAspectRatio: false,
-                plugins: {
-                    title: {
-                        display: true,
-                        text: 'Download Speed Tiers',
-                        position: 'bottom',
-                        font: {
-                            family: '"Open Sans", "sans-serif"',
-                            size: 14,
-                            weight: 'normal'
-                        }
+                tooltips: {
+                    custom: function (tooltip) {
+                        if (!tooltip) return;
+                        tooltip.displayColors = false;
                     },
-                    legend: {
-                        display: false
-                    },
-                    tooltip: {
-                        position: 'nearest',
-                        displayColors: false,
-                        caretSize: 7,
-                        caretPadding: 4,
-                        bodyFont: {
-                            size: 14
-                        },
-                        callbacks: {
-                            title: function (context) {
-                                return;
-                            },
-                            label: function (context) {
-                                return context.label + ': ' + parseFloat(context.raw.toFixed(3)) + '%';
-                            }
+                    callbacks: {
+                        title: function () {},
+                        label: function (tooltipItem, data) {
+                            var label = data.labels[tooltipItem.index] + ': ';
+                            label += parseFloat((data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]).toFixed(3)) + '%';
+                            return label;
                         }
                     }
+                },
+                legend: {
+                    display: false
                 }
             };
 
             if (chart_obj.broadband.dl_tiers.chart) {
                 chart_obj.broadband.dl_tiers.chart.destroy();
             }
+
             chart_obj.broadband.dl_tiers.chart = new Chart(document.getElementById('ch-canvas-broadband-2'), {
                 type: 'doughnut',
                 data: chart_obj.broadband.dl_tiers.data,
                 options: chart_obj.broadband.dl_tiers.options
             });
+
+            // $('#ch-legend-broadband-2').html('Download Speed Tiers');
         }
 
         // ***********************************************************
@@ -291,18 +264,7 @@ function createCharts() {
         if (current_slide === 3) {
 
             chart_obj.broadband.ul_tiers.data = {
-                labels: [
-                    '1 - 3 mbps',
-                    '3 - 4 mbps',
-                    '4 - 6 mbps',
-                    '6 - 10 mbps',
-                    '10 - 15 mbps',
-                    '15 - 25 mbps',
-                    '25 - 50 mbps',
-                    '50 - 100 mbps',
-                    '100 - 1,000 mbps',
-                    '> 1,000 mbps'
-                ],
+                labels: ['1 - 3 mbps', '3 - 4 mbps', '4 - 6 mbps', '6 - 10 mbps', '10 - 15 mbps', '15 - 25 mbps', '25 - 50 mbps', '50 - 100 mbps', '100 - 1,000 mbps', '> 1,000 mbps'],
                 datasets: [{
                     data: [
                         geo_prop.pctusgt1000kandlt3000k_hi,
@@ -331,39 +293,36 @@ function createCharts() {
                 }]
             };
 
+
             chart_obj.broadband.ul_tiers.options = {
+                // responsive: true,
                 maintainAspectRatio: false,
-                plugins: {
-                    title: {
-                        display: true,
-                        text: 'Upload Speed Tiers',
-                        position: 'bottom',
-                        font: {
-                            family: '"Open Sans", "sans-serif"',
-                            size: 14,
-                            weight: 'normal'
-                        }
+                title: {
+                    display: true,
+                    position: 'bottom',
+                    text: 'Upload Speed Tiers',
+                    fontSize: 14,
+                    fontFamily: '"Open Sans", "sans-serif"',
+                    fontStyle: 'normal'
+                },
+                tooltips: {
+                    custom: function (tooltip) {
+                        if (!tooltip) return;
+                        // Disable displaying the color box;
+                        tooltip.displayColors = false;
                     },
-                    legend: {
-                        display: false
-                    },
-                    tooltip: {
-                        position: 'nearest',
-                        displayColors: false,
-                        caretSize: 7,
-                        caretPadding: 4,
-                        bodyFont: {
-                            size: 14
+                    callbacks: {
+                        title: function (tooltipItem, data) {
                         },
-                        callbacks: {
-                            title: function (context) {
-                                return;
-                            },
-                            label: function (context) {
-                                return context.label + ': ' + context.raw.toFixed(3) + '%';
-                            }
+                        label: function (tooltipItem, data) {
+                            var label = data.labels[tooltipItem.index] + ': ';
+                            label += parseFloat((data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]).toFixed(3)) + '%';
+                            return label;
                         }
                     }
+                },
+                legend: {
+                    display: false
                 }
             };
 
@@ -371,17 +330,19 @@ function createCharts() {
                 chart_obj.broadband.ul_tiers.chart.destroy();
             }
 
-            chart_obj.broadband.ul_tiers.chart = new Chart(document.getElementById('ch-canvas-broadband-3'), {
+            chart_obj.broadband.num_providers.chart = new Chart(document.getElementById('ch-canvas-broadband-3'), {
                 type: 'doughnut',
                 data: chart_obj.broadband.ul_tiers.data,
                 options: chart_obj.broadband.ul_tiers.options
             });
-        }
 
+            // $('#ch-legend-broadband-3').html('Upload Speed Tiers');
+        }
     } else if (cur_tab === 'population') {
 
         var current_slide = $('#carousel-pop .carousel-inner div.active').index() + 1;
 
+        //console.log(' current_slide : ' + current_slide );
         if (chart_obj.broadband.dl_tiers.chart) {
             chart_obj.broadband.dl_tiers.chart.destroy();
         }
@@ -395,58 +356,45 @@ function createCharts() {
             chart_obj.population.ruralurban.chart.destroy();
         }
 
+
         if (current_slide === 1) {
 
             chart_obj.population.ruralurban.data = {
-                labels: [
-                    'Rural',
-                    'Urban'
-                ],
+                labels: ['Rural', 'Urban'],
                 datasets: [{
-                    data: [
-                        geo_prop.rural_total,
-                        geo_prop.urban_total
-                    ],
-                    backgroundColor: [
-                        '#71DAD6',
-                        '#3D59D7'
-                    ]
+                    data: [geo_prop.rural_total, geo_prop.urban_total],
+                    backgroundColor: ['#71DAD6', '#3D59D7']
                 }]
             };
 
             chart_obj.population.ruralurban.options = {
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: true,
-                        position: 'bottom',
-                        labels: {
-                            font: {
-                                size: 14
-                            },
-                            boxWidth: 16,
-                            boxHeight: 16
-                        }
+                responsive: true,
+                // maintainAspectRatio: false,
+                tooltips: {
+                    custom: function (tooltip) {
+                        if (!tooltip) return;
+                        // Disable displaying the color box;
+                        tooltip.displayColors = false;
                     },
-                    tooltip: {
-                        position: 'nearest',
-                        displayColors: false,
-                        caretSize: 7,
-                        caretPadding: 4,
-                        bodyFont: {
-                            size: 14
-                        },
-                        callbacks: {
-                            title: function (context) {
-                                return;
-                            },
-                            label: function (context) {
-                                var total = context.dataset.data[0] + context.dataset.data[1];
-                                var val = (context.raw / total * 100).toFixed(1);
-                                return context.label + ': ' + context.formattedValue + ' (' + val + '%)';
-                            }
+                    callbacks: {
+                        title: function (tooltipItem, data) {},
+                        label: function (tooltipItem, data) {
+                            var label = data.labels[tooltipItem.index] + ': ';
+
+                            // Calculate percentage of total population
+                            var popTotal = data.datasets[tooltipItem.datasetIndex].data[0] + data.datasets[tooltipItem.datasetIndex].data[1]
+                            var popVal = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+                            var percentPop = ((popVal / popTotal) * 100).toFixed(1);
+
+                            // Display label with value and population percentage
+                            label += data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index].toLocaleString() + ' (' + percentPop + '%)';
+
+                            return label;
                         }
                     }
+                },
+                legend: {
+                    display: false
                 }
             };
 
@@ -460,6 +408,7 @@ function createCharts() {
                 options: chart_obj.population.ruralurban.options
             });
 
+            // $('#ch-legend-population-1').html(chart_obj.population.ruralurban.chart.generateLegend());
         }
     }
 }

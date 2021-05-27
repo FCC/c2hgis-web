@@ -611,12 +611,9 @@
 									</div>
 									<br />
                                     <div align="center">
-                                        <div style="width: 300px; height: 220px">
-    										<canvas id="ch-canvas-health-1"></canvas>
-                                        </div>
-                                        <div id="ch-legend-health-1" style="width: 300px; height: 30px; text-align: center;">
-                                            <div style="background-color:rgba(186,12,12,0.5); width: 20px; height: 2px; display: inline-block; margin: 4px 0;"></div>&nbsp;
-                                            Health Behaviors
+                                        <div class="carousel-cont">
+                                            <canvas id="ch-canvas-health-1" width="250" height="150"></canvas>
+                                            <div id="ch-legend-health-1" style="width: 300px; height: 30px; text-align: center;"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -811,7 +808,7 @@
 											</div>
 											<div class="item">
 												<div class="carousel-cont">
-													<canvas id="ch-canvas-broadband-3" class="carousel-canvas" width="300" height="250"></canvas>
+													<canvas id="ch-canvas-broadband-3" class="carousel-canvas" width="250" height="250"></canvas>
 												</div>
 											</div>
 										</div>
@@ -953,7 +950,10 @@
                                         <div class="carousel-inner" role="listbox">
                                             <div class="item active">
                                                 <div class="carousel-cont">
-                                                    <canvas id="ch-canvas-population-1" class="carousel-canvas"></canvas>
+                                                    <canvas id="ch-canvas-population-1" class="carousel-canvas" width="250" height="180"></canvas>
+                                                    <div id="ch-legend-population-1" class="carousel-legend" >
+                                                        <div style="background-color:#3D59D7; width: 16px; height: 16px; display: inline-block;"></div>&nbsp;Urban &nbsp; <div style="background-color:#71DAD6; width: 16px; height: 16px; display: inline-block;"></div>&nbsp;Rural &nbsp;
+                                                    </div>
                                                 </div>
                                             </div>                                          
                                         </div>
@@ -1082,19 +1082,29 @@
     
 	<script src="js/jquery-3.6.0.min.js"></script>
 	<script src="js/jquery-ui.js"></script>
+
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/bootstrap-toolkit.min.js"></script>
-    <script src='js/mapbox.js'></script>
+
+
+    <script src='https://api.mapbox.com/mapbox.js/v3.1.0/mapbox.js'></script>
+
+	
 	<script src="js/bootstrap-select.js"></script>
-	<script src="js/chart.js"></script>
-	<script src="js/jquery-color-animation-mainfile.js"></script>
+    <script src="js/chart.js"></script>
+
+	<script src="js/jquery-color-animation-mainfile.js"></script>	
+
     <script src="js/theme.js"></script>
-	<script src="data/national_201705.js"></script>
+	
+	<script src="data/national_201705.js"></script>		
 	<script src="data/states.js"></script>
     <script src="data/states_abbr.js"></script>  
-	<script src="data/layers.js"></script>
-	<script src="js/app-charts.js"></script>
-	<script src="js/app.js"></script>
+	<script src="data/layers.js"></script>	
+	
+	<script src="js/app-charts.js"></script>	
+	
+	<script src="js/app.js"></script>	
 
 </body>
 </html>
